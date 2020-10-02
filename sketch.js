@@ -7,6 +7,7 @@ class Board{
     this.tiles = []
     this.playerSign = 'X'
     this.status = "Turn Player " + this.playerSign
+    this.turn = 0
   }
   setup_Tiles(){
     var NUM_COLS = this.columns;
@@ -38,6 +39,63 @@ class Board{
     text('Status:  '+ this.status, 
           this.width * 0.10,
           this.height * 0.98)
+  }
+
+  check_state_game(){
+
+    if( this.are_there_winning_columns() == true ){
+      this.status = 'Columns works'
+      this.block_all_tiles()
+    }
+
+    else if( this.are_all_tiles_used() == true ){
+      this.status = 'Draw'
+    }
+
+
+
+  }
+
+  are_all_tiles_used(){
+    for(var tile of this.tiles){
+      if(tile.isBlock == false)
+        return false
+    }
+    return true
+
+  }
+
+  block_all_tiles(){
+    for(var tile of this.tiles)
+      tile.isBlock = true
+  }
+
+  are_there_winning_columns(){
+
+      var tiles = this.tiles
+      
+      if(tiles[0].value == tiles[1].value){ 
+        if( tiles[1].value == tiles[2].value) 
+          if(tiles[0].value != '')
+            return true
+      }
+      if(tiles[3].value == tiles[4].value){ 
+        if( tiles[4].value == tiles[5].value ){
+          if(tiles[3].value != ''){
+            return true
+          }
+        }
+      }
+      if(tiles[6].value == tiles[7].value){ 
+        if( tiles[7].value == tiles[8].value )
+          if(tiles[6].value != '')
+           return true
+      }
+     
+     
+
+    return false
+
   }
 
 }
@@ -81,7 +139,7 @@ class Tile{
 
 // Main
 function setup(){
-  frameRate(5)
+  frameRate(10)
   
   board = new Board(3,3)
  
@@ -103,11 +161,18 @@ function draw(){
 
   board.draw_Tiles()
   board.draw_Messages()
+
+  board.check_state_game()
 }
 
 
 // Events
 mouseClicked = function(){
+  tiles = board.tiles
+  
+  console.log(tiles[0].value != '')
+
+
   for(tile of board.tiles ){
     if(tile.isClicked(mouseX, mouseY) == true){
 
@@ -119,12 +184,13 @@ mouseClicked = function(){
               board.playerSign = 'X'
             tile.isBlock = true; 
             board.status = "Turn Player " + board.playerSign
+            board.turn++
         }
       }
       
   }
+
+
+
 }
-
-
-  
 
