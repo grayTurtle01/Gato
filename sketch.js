@@ -7,7 +7,7 @@ class Board{
     this.tiles = []
     this.playerSign = 'X'
     this.status = "Turn Player " + this.playerSign
-    this.turn = 0
+    this.endGame = false
   }
   setup_Tiles(){
     var NUM_COLS = this.columns;
@@ -43,21 +43,28 @@ class Board{
 
   check_state_game(){
 
+  if( this.endGame == false){
     if( this.are_there_winning_columns() == true ){
-      this.status = 'Player ' +this.playerSign +' Loses'
+      this.swap_player()
+      this.status = 'Player ' +this.playerSign +' Wins by Column'
       this.block_all_tiles()
+      this.endGame = true
     }
-
+    
     if( this.are_there_winning_rows() == true ){
-      this.status = 'Rows works'
+      this.swap_player()
+      this.status = 'Player ' +this.playerSign +' Wins by Row'
       this.block_all_tiles()
+      this.endGame = true
     }
-
+    
     if( this.are_there_winning_diagonals() == true ){
-      this.status = 'Diagonals works'
+      this.swap_player()
+      this.status = 'Player ' +this.playerSign +' Wins by Diagonal'
       this.block_all_tiles()
+      this.endGame = true
     }
-
+  }
 
     // else if( this.are_all_tiles_used() == true ){
     //   this.status = 'Draw'
@@ -161,6 +168,13 @@ class Board{
 
   }
 
+  swap_player(){
+    if( this.playerSign == 'X')
+      this.playerSign = 'O'
+    else
+      this.playerSign = 'X'
+  }
+
 }
 
 class Tile{
@@ -202,7 +216,7 @@ class Tile{
 
 // Main
 function setup(){
-  frameRate(10)
+  frameRate(5)
   
   board = new Board(3,3)
  
@@ -241,13 +255,12 @@ mouseClicked = function(){
 
         if( tile.isBlock == false){  
             tile.value = board.playerSign
-            if( board.playerSign == 'X')
-              board.playerSign = 'O'
-              else
-              board.playerSign = 'X'
+            
+            board.swap_player()
+
             tile.isBlock = true; 
             board.status = "Turn Player " + board.playerSign
-            board.turn++
+
         }
       }
       
