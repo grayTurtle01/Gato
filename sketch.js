@@ -2,7 +2,7 @@ class Board{
   constructor(rows, columns){
     this.rows = rows
     this.columns = columns
-    this.height = window.innerHeight/2
+    this.height = window.innerHeight*0.75
     this.width = this.height
     this.tiles = []
     this.playerSign = 'X'
@@ -54,9 +54,9 @@ class Tile{
     rect(this.x, this.y, this.size, this.size, 10);
 
     fill(0)
-    textSize(70)
+    textSize(this.size*0.75)
     text(this.value, 
-         this.x + this.size*0.25, 
+         this.x + this.size*0.23, 
          this.y + this.size*0.75)
 
   }
