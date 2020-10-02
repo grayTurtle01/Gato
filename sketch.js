@@ -44,7 +44,7 @@ class Board{
   check_state_game(){
 
     if( this.are_there_winning_columns() == true ){
-      this.status = 'Columns works'
+      this.status = 'Player ' +this.playerSign +' Loses'
       this.block_all_tiles()
     }
 
@@ -53,9 +53,15 @@ class Board{
       this.block_all_tiles()
     }
 
-    else if( this.are_all_tiles_used() == true ){
-      this.status = 'Draw'
+    if( this.are_there_winning_diagonals() == true ){
+      this.status = 'Diagonals works'
+      this.block_all_tiles()
     }
+
+
+    // else if( this.are_all_tiles_used() == true ){
+    //   this.status = 'Draw'
+    // }
 
 
 
@@ -103,7 +109,6 @@ class Board{
 
   }
 
-
   are_there_winning_rows(){
 
     var tiles = this.tiles
@@ -130,7 +135,31 @@ class Board{
 
   return false
 
-}
+  }
+
+  are_there_winning_diagonals(){
+
+    var tiles = this.tiles
+    
+    if(tiles[0].value == tiles[4].value){ 
+      if( tiles[4].value == tiles[8].value) 
+        if(tiles[0].value != '')
+          return true
+    }
+    if(tiles[2].value == tiles[4].value){ 
+      if( tiles[4].value == tiles[6].value ){
+        if(tiles[2].value != ''){
+          return true
+        }
+      }
+    }
+   
+   
+   
+
+  return false
+
+  }
 
 }
 
