@@ -48,6 +48,11 @@ class Board{
       this.block_all_tiles()
     }
 
+    if( this.are_there_winning_rows() == true ){
+      this.status = 'Rows works'
+      this.block_all_tiles()
+    }
+
     else if( this.are_all_tiles_used() == true ){
       this.status = 'Draw'
     }
@@ -97,6 +102,35 @@ class Board{
     return false
 
   }
+
+
+  are_there_winning_rows(){
+
+    var tiles = this.tiles
+    
+    if(tiles[0].value == tiles[3].value){ 
+      if( tiles[3].value == tiles[6].value) 
+        if(tiles[0].value != '')
+          return true
+    }
+    if(tiles[1].value == tiles[4].value){ 
+      if( tiles[4].value == tiles[7].value ){
+        if(tiles[1].value != ''){
+          return true
+        }
+      }
+    }
+    if(tiles[2].value == tiles[5].value){ 
+      if( tiles[5].value == tiles[8].value )
+        if(tiles[2].value != '')
+         return true
+    }
+   
+   
+
+  return false
+
+}
 
 }
 
