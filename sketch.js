@@ -6,6 +6,7 @@ class Board{
     this.width = this.height
     this.tiles = []
     this.playerSign = 'X'
+    this.status = "Turn Player " + this.playerSign
   }
   setup_Tiles(){
     var NUM_COLS = this.columns;
@@ -32,7 +33,12 @@ class Board{
       tile.draw();
     }
   }
-
+  draw_Messages(){
+    textSize( this.height * 0.04 )
+    text('Status:  '+ this.status, 
+          this.width * 0.10,
+          this.height * 0.98)
+  }
 
 }
 
@@ -85,11 +91,18 @@ function setup(){
 
   board.setup_Tiles()
   board.draw_Tiles()
+  board.draw_Messages()
 
 }
 
 function draw(){
+  background(255)
+  fill(255)
+  rect(0, 0, width, height )
+
+
   board.draw_Tiles()
+  board.draw_Messages()
 }
 
 
@@ -105,6 +118,7 @@ mouseClicked = function(){
               else
               board.playerSign = 'X'
             tile.isBlock = true; 
+            board.status = "Turn Player " + board.playerSign
         }
       }
       
