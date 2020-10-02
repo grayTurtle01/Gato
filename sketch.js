@@ -10,11 +10,11 @@ class Board{
   setup_Tiles(){
     var NUM_COLS = this.columns;
     var NUM_ROWS = this.rows;
-    var padding_left = 10;
-    var padding_top = 10;
+    var padding_left = 30;
+    var padding_top = 30;
     var margin_right = 10;
     
-    var cardSize = (this.width - padding_left  - margin_right*this.columns)/this.columns
+    var cardSize = (this.width - padding_left*2  - margin_right*this.columns)/this.columns
 
     for (var i = 0; i < NUM_COLS; i++) {
       for (var j = 0; j < NUM_ROWS; j++) {
@@ -104,7 +104,7 @@ mouseClicked = function(){
               board.playerSign = 'O'
               else
               board.playerSign = 'X'
-
+            tile.isBlock = true; 
         }
       }
       
