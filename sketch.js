@@ -2,9 +2,10 @@ class Board{
   constructor(rows, columns){
     this.rows = rows
     this.columns = columns
-    this.height = window.innerHeight/2
+    this.height = window.innerHeight*0.75
     this.width = this.height
     this.tiles = []
+    this.playerSign = 'X'
   }
   setup_Tiles(){
     var NUM_COLS = this.columns;
@@ -41,7 +42,7 @@ class Tile{
     this.x = x
     this.y = y
     this.size = 125
-    this.value = "X"
+    this.value = ""
     this.isFaceUp = false
     this.isBlock = false
     this.index_tile = 0
@@ -53,9 +54,9 @@ class Tile{
     rect(this.x, this.y, this.size, this.size, 10);
 
     fill(0)
-    textSize(70)
+    textSize(this.size*0.75)
     text(this.value, 
-         this.x + this.size*0.25, 
+         this.x + this.size*0.23, 
          this.y + this.size*0.75)
 
   }
@@ -74,7 +75,7 @@ class Tile{
 
 // Main
 function setup(){
-  frameRate(1)
+  frameRate(5)
   
   board = new Board(3,3)
  
@@ -88,11 +89,27 @@ function setup(){
 }
 
 function draw(){
- 
+  board.draw_Tiles()
 }
 
 
 // Events
+mouseClicked = function(){
+  for(tile of board.tiles ){
+    if(tile.isClicked(mouseX, mouseY) == true){
+
+        if( tile.isBlock == false){  
+            tile.value = board.playerSign
+            if( board.playerSign == 'X')
+              board.playerSign = 'O'
+              else
+              board.playerSign = 'X'
+
+        }
+      }
+      
+  }
+}
 
 
   
