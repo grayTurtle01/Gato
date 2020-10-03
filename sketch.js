@@ -221,8 +221,8 @@ function setup(){
   board = new Board(3,3)
  
   createCanvas(board.width, board.height);
-  fill( 255 )
-  rect(0, 0, width, height)
+  fill( 0 )
+  rect(0, 0, width, height, 10)
 
   board.setup_Tiles()
   board.draw_Tiles()
@@ -232,8 +232,8 @@ function setup(){
 
 function draw(){
   background(255)
-  fill(255)
-  rect(0, 0, width, height )
+  fill(0)
+  rect(0, 0, width, height, 10 )
 
 
   board.draw_Tiles()
