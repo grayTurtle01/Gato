@@ -9,6 +9,7 @@ class Board{
     this.status = "Turn Player " + this.playerSign
     this.endGame = false
   }
+  
   setup_Tiles(){
     var NUM_COLS = this.columns;
     var NUM_ROWS = this.rows;
@@ -28,13 +29,16 @@ class Board{
       }
     } 
   }
+
   draw_Tiles(){
     for (var i = 0; i < this.tiles.length; i++) {
       var tile = this.tiles[i]
       tile.draw();
     }
   }
+
   draw_Messages(){
+    fill(255)
     textSize( this.height * 0.04 )
     text('Status:  '+ this.status, 
           this.width * 0.10,
